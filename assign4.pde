@@ -40,7 +40,7 @@ void setup () {
   fighterX = 590;
   fighterY = 240;
   bgX = 0;
-  hp1 = 38;
+  hp1 = 190;
   enemyW = 60;
   enemyH = 60;
   enemyX = 0;
@@ -86,12 +86,15 @@ void draw() {
          straightX[i] = enemyX-i*enemyW;
          straightY[i] = enemyY;
          image(enemy,straightX[i],straightY[i]);
-     //hit detection   
-     if(fighterX >= straightX[i] && fighterX <= straightX[i]+enemyW && fighterY >= straightY[i] && fighterY <= straightY[i]+enemyH){
-     hp1-=38;
-     println (hp1) ;
-     straightX[i] =0;}
-       }
+         //hit detection   
+         if(fighterX+fighterH >= straightX[i] && fighterX <= straightX[i]+enemyW){
+         if(fighterY+fighterH >= straightY[i] && fighterY <= straightY[i]+enemyH){
+             hp1-=38;
+             println (hp1) ;
+             straightX[i] =-10;
+           straightY[i] = -10;}
+           }
+         }
        enemyX += 5;
        if(enemyX-enemyW*4 > width){
          enemyState = TILT;
@@ -104,14 +107,15 @@ void draw() {
       for (int j=0; j<5; j++){
         tiltX[j] = enemyX-j*enemyW;
         tiltY[j] = enemyY+j*enemyH;
-        image(enemy, tiltX[j], tiltY[j]);
-        }
+        image(enemy, tiltX[j], tiltY[j]); 
+      }
         enemyX+=5;
           if (enemyX-4*enemyW > width){
           enemyState = DIAMOND;
           enemyX=0;
           enemyY = floor(random(150, 300)); 
           }
+         
       break; 
         
     case DIAMOND:
@@ -123,14 +127,15 @@ void draw() {
         image(enemy, diamondX1[k], diamondY1[k]);
         image(enemy, diamondX1[k], diamondY2[k]);
         image(enemy, diamondX2[k], diamondY1[k]);
-        image(enemy, diamondX2[k], diamondY2[k]);
-      }
+        image(enemy, diamondX2[k], diamondY2[k]); 
+    }
       enemyX+=5;
       if (enemyX-enemyW*4 > width) {
         enemyState = STRAIGHT;
         enemyX=0;
         enemyY = floor(random(50, 360)); 
       }
+        
       break;
     }
     //fighter
@@ -159,14 +164,7 @@ void draw() {
         fighterX = 590;
       }
     }
-/*
-     //hit detection   
-     if(fighterX >= enemyX && fighterX <= enemyX+enemyW && fighterY >= enemyY && fighterY <= enemyY+enemyH){
-     //hp1-=38;
-     println (hp1) ;
-     enemyX=0;
-     }
-*/              
+              
      if(fighterX+fighterW >= treasureX && fighterX <= treasureX+treasureW+fighterW && fighterY >= treasureY-fighterH && fighterY <= treasureY+fighterH){
      hp1 += 19;
      println(hp1);
@@ -184,7 +182,7 @@ void draw() {
     if (mouseY > 305 && mouseY < 350 && mouseX > 200 && mouseX < 434) {
       image(end1, 0, 0);
       if (mousePressed) {
-        hp1 = 38;
+        hp1 = 190;
         fighterX = 590;
         fighterY = 240;
         gameState = GAME_RUN;
