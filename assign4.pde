@@ -38,7 +38,7 @@ void setup () {
   fighterX = 590;
   fighterY = 240;
   bgX = 0;
-  hp1 = 190;
+  hp1 = 38;
   enemyW = 60;
   enemyH = 60;
   enemyX = 0;
@@ -156,7 +156,7 @@ void draw() {
                if(fighterY+fighterH >= enemyY && fighterY <= enemyY+enemyH){
                    shoot[i] = false;  
                    hp1-=38;
-                   println (hp1) ;
+                   //println (hp1) ;
                    image(flames[i], enemyX-enemyXY[i]*enemyW, enemyY-enemyXY[i]*enemyH);
                    }
                  }
@@ -224,7 +224,7 @@ void draw() {
     if (mouseY > 305 && mouseY < 350 && mouseX > 200 && mouseX < 434) {
       image(end1, 0, 0);
       if (mousePressed) {
-        hp1 = 190;
+        hp1 = 38;
         fighterX = 590;
         fighterY = 240;
         gameState = GAME_RUN;
