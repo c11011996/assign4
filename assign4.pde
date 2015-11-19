@@ -110,8 +110,8 @@ void draw() {
         enemyXY[i] = i;
         //hit detection         
         if(shoot[i]){  
-             if(fighterX+fighterH >= enemyX-enemyXY[i]*enemyW && fighterX <= enemyX-enemyXY[i]*enemyW+enemyW){
-             if(fighterY+fighterH >= enemyY && fighterY <= enemyY+enemyH){
+             if(fighterX+fighterH >= enemyX-enemyXY[i]*enemyW && fighterX <= enemyX+(1-enemyXY[i])*enemyW){
+             if(fighterY+fighterH >= enemyY+enemyXY[i]*enemyH && fighterY <= enemyY+(1+enemyXY[i])*enemyH){
                  shoot[i] = false;  
                  hp1-=38;
                  println (hp1) ;
@@ -153,7 +153,7 @@ void draw() {
           }
         }
         enemyX+=5;
-        if (enemyX-enemyW*4 > width) {
+        if (enemyX-enemyW*3 > width) {
           enemyState = STRAIGHT;
           enemyX=0;
           enemyY = floor(random(50, 360)); 
