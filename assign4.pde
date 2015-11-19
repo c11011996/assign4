@@ -6,7 +6,7 @@ PImage bg1, bg2, enemy, fighter, hp, treasure, start1, start2, end1, end2, flame
 PImage [] flames = new PImage [5];
 final int GAME_START = 0, GAME_RUN = 1, GAME_WIN = 2, GAME_OVER = 3;
 final int STRAIGHT = 0, TILT = 1, DIAMOND = 2;
-boolean [] shoot = new boolean [5];
+boolean [] shoot = new boolean [8];
 int gameState, enemyState;
 boolean upPressed = false;
 boolean downPressed = false;
@@ -126,7 +126,7 @@ void draw() {
                  shoot[i] = false;  
                  hp1-=38;
                  //println (hp1) ;
-                 image(flames[i],enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
+                 image(flames[i],enemyX-enemyXY[i]*enemyW,enemyY);
                  }
                }
              }
@@ -138,7 +138,7 @@ void draw() {
           if (enemyX-4*enemyW > width){
           enemyState = DIAMOND;
           enemyX=0;
-          enemyY = floor(random(150, 300));
+          enemyY = floor(random(50, 200));
           for(int i=0; i<5; i++){
             shoot[i] = true;
            } 
@@ -148,41 +148,61 @@ void draw() {
         
     case DIAMOND:
         for(int i=0; i<3; i++){
-          int [] enemyXY = new int [3];
-          enemyXY[i] = i;
+          int [] enemyXY = new int [8];
+          enemyXY[i] = i*60-170;
           //hit detection         
           if(shoot[i]){  
-              if(fighterX <= enemyX+(i-enemyXY[i])*enemyW && fighterX+fighterW >= enemyX-enemyXY[i]*enemyW){
-              if(fighterY+fighterH >= enemyY-enemyXY[i]*enemyH && fighterY <= enemyY+(1-enemyXY[i])*enemyH){
+              if(enemyY+enemyXY[i]+170+60>=fighterY && fighterY>=enemyY+enemyXY[i]+170-50){
+              if(enemyX+enemyXY[i]-30-50<=fighterX && fighterX<=enemyX+enemyXY[i]-30+60){
                    shoot[i] = false;  
                    hp1-=38;
-                   println (hp1) ;
+                   println (hp1);
+                   image(flames[i],enemyX+enemyXY[i]-30, enemyY+enemyXY[i]+170);
                    }
                  }
                }
           if(shoot[i]==true){
-          image(enemy, enemyX-enemyXY[i]*enemyW, enemyY-enemyXY[i]*enemyH);
+          image(enemy, enemyX+enemyXY[i]-30, enemyY+enemyXY[i]+170);
           }
         }
-        for(int i=0; i<3; i++){
-          int [] enemyXY = new int [3];
-          enemyXY[i] = i;
+        for(int i=3; i<6; i++){
+          int [] enemyXY = new int [8];
+          enemyXY[i] = (i-3)*60-170;
           //hit detection         
           if(shoot[i]){  
-              if(fighterX <= enemyX+(i-enemyXY[i])*enemyW && fighterX+fighterW >= enemyX-enemyXY[i]*enemyW){
-              if(fighterY+fighterH >= enemyY+enemyXY[i]*enemyH && fighterY <= enemyY+(1+enemyXY[i])*enemyH){
+             if(enemyY+enemyXY[i]+290+60>=fighterY && fighterY>=enemyY+enemyXY[i]+290-50){
+             if(enemyX+enemyXY[i]-120-30-50<=fighterX && fighterX<=enemyX+enemyXY[i]-120-30+60){
                    shoot[i] = false;  
                    hp1-=38;
                    println (hp1) ;
+                   image(flames[i],enemyX+enemyXY[i]-120-30, enemyY+enemyXY[i]+290);
                    }
                  }
                }
           if(shoot[i]==true){
-          image(enemy, enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
+          image(enemy, enemyX+enemyXY[i]-120-30, enemyY+enemyXY[i]+290);
+          }
+        }
+        for(int i=6; i<8; i++){
+          int [] enemyXY = new int [8];
+          enemyXY[i] = (i-6)*120-170;
+          //hit detection         
+          if(shoot[i]){  
+            if(enemyY+enemyXY[i]+230+60>=fighterY && fighterY>=enemyY+enemyXY[i]+230-50){
+            if(enemyX+enemyXY[i]-60-30-50<=fighterX && fighterX<=enemyX+enemyXY[i]-60-30+60){
+                   shoot[i] = false;  
+                   hp1-=38;
+                   println (hp1) ;
+                   image(flames[i],enemyX+enemyXY[i]-60-30, enemyY+enemyXY[i]+230);
+                   }
+                 }
+               }
+          if(shoot[i]==true){
+          image(enemy, enemyX+enemyXY[i]-60-30, enemyY+enemyXY[i]+230);
           }
         }
         enemyX+=5;
-        if (enemyX-enemyW*3 > width) {
+        if (enemyX-enemyW*5 > width) {
           enemyState = STRAIGHT;
           enemyX=0;
           enemyY = floor(random(50, 360));
