@@ -100,7 +100,10 @@ void draw() {
            if(enemyX-enemyW*4 > width){
              enemyState = TILT;
              enemyX=0;
-             enemyY = floor(random(50, 180));    
+             enemyY = floor(random(50, 180));
+             for(int i=0; i<5; i++){
+               shoot[i] = true;
+             }
            }
        break;
        
@@ -126,7 +129,10 @@ void draw() {
           if (enemyX-4*enemyW > width){
           enemyState = DIAMOND;
           enemyX=0;
-          enemyY = floor(random(150, 300)); 
+          enemyY = floor(random(150, 300));
+          for(int i=0; i<5; i++){
+            shoot[i] = true;
+           } 
           }
          
       break; 
@@ -156,7 +162,10 @@ void draw() {
         if (enemyX-enemyW*3 > width) {
           enemyState = STRAIGHT;
           enemyX=0;
-          enemyY = floor(random(50, 360)); 
+          enemyY = floor(random(50, 360));
+          for(int i=0; i<5; i++){
+               shoot[i] = true;
+             }
         }
       break;
     }
@@ -209,6 +218,12 @@ void draw() {
         fighterX = 590;
         fighterY = 240;
         gameState = GAME_RUN;
+        enemyState = STRAIGHT;
+        enemyX=0;
+        enemyY = floor(random(50, 360));
+        for(int i=0; i<5; i++){
+         shoot[i] = true;
+        }
       }
     }
     break;
