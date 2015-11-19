@@ -6,14 +6,7 @@ int enemyX, enemyY, enemyW, enemyH;
 PImage bg1, bg2, enemy, fighter, hp, treasure, start1, start2, end1, end2;
 final int GAME_START = 0, GAME_RUN = 1, GAME_WIN = 2, GAME_OVER = 3;
 final int STRAIGHT = 0, TILT = 1, DIAMOND = 2;
-int [] straightX = new int[5];
-int [] straightY = new int[5];
-int [] tiltX = new int[5];
-int [] tiltY = new int[5];
-int [] diamondX1 = new int[3];
-int [] diamondY1 = new int[3];
-int [] diamondX2 = new int[3];
-int [] diamondY2 = new int[3];
+boolean [] shoot = new boolean [5];
 int gameState, enemyState;
 boolean upPressed = false;
 boolean downPressed = false;
@@ -62,6 +55,10 @@ void draw() {
       image(start1, 0, 0);
       if (mousePressed) {
         gameState = GAME_RUN;
+          //as a trigger of the enemy
+          for(int i=0; i<5; i++){
+          shoot[i] = true;
+        }
       }
     }
     break;
@@ -82,34 +79,50 @@ void draw() {
     //enemy
     switch(enemyState) {
        case STRAIGHT:
-       for(int i=0;i<5;i++){
-         straightX[i] = enemyX-i*enemyW;
-         straightY[i] = enemyY;
-         image(enemy,straightX[i],straightY[i]);
-         //hit detection   
-         if(fighterX+fighterH >= straightX[i] && fighterX <= straightX[i]+enemyW){
-         if(fighterY+fighterH >= straightY[i] && fighterY <= straightY[i]+enemyH){
-             hp1-=38;
-             println (hp1) ;
-             straightX[i] =-10;
-           straightY[i] = -10;}
-           }
+           for(int i=0;i<5;i++){
+             int [] enemyXY = new int [5];
+             enemyXY[i] = i;
+             if(shoot[i]){
+             //hit detection   
+             if(fighterX+fighterH >= enemyX-enemyXY[i]*enemyW && fighterX <= enemyX-enemyXY[i]*enemyW+enemyW){
+             if(fighterY+fighterH >= enemyY && fighterY <= enemyY+enemyH){
+                 shoot[i] = false;  
+                 hp1-=38;
+                 println (hp1) ;
+                 }
+               }
+             }
+             if(shoot[i]==true){
+             image(enemy,enemyX-enemyXY[i]*enemyW,enemyY);
+             } 
          }
-       enemyX += 5;
-       if(enemyX-enemyW*4 > width){
-         enemyState = TILT;
-         enemyX=0;
-         enemyY = floor(random(50, 180)); 
-       }
+           enemyX += 5;
+           if(enemyX-enemyW*4 > width){
+             enemyState = TILT;
+             enemyX=0;
+             enemyY = floor(random(50, 180));    
+           }
        break;
        
     case TILT:
-      for (int j=0; j<5; j++){
-        tiltX[j] = enemyX-j*enemyW;
-        tiltY[j] = enemyY+j*enemyH;
-        image(enemy, tiltX[j], tiltY[j]); 
-      }
-        enemyX+=5;
+      for (int i=0; i<5; i++){
+        int [] enemyXY = new int [5];
+        enemyXY[i] = i;
+        //hit detection         
+        if(shoot[i]){  
+             if(fighterX+fighterH >= enemyX-enemyXY[i]*enemyW && fighterX <= enemyX-enemyXY[i]*enemyW+enemyW){
+             if(fighterY+fighterH >= enemyY && fighterY <= enemyY+enemyH){
+                 shoot[i] = false;  
+                 hp1-=38;
+                 println (hp1) ;
+                 }
+               }
+             }
+             if(shoot[i]==true){
+               image(enemy, enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);   
+             }
+         }
+         enemyX+=5;
           if (enemyX-4*enemyW > width){
           enemyState = DIAMOND;
           enemyX=0;
@@ -119,23 +132,32 @@ void draw() {
       break; 
         
     case DIAMOND:
-      for(int k=0; k<3; k++){
-        diamondX1 [k] = enemyX-k*enemyW;
-        diamondX2 [k] = enemyX-(4-k)*enemyW;
-        diamondY1 [k] = enemyY-k*enemyH;
-        diamondY2 [k] = enemyY+k*enemyH;
-        image(enemy, diamondX1[k], diamondY1[k]);
-        image(enemy, diamondX1[k], diamondY2[k]);
-        image(enemy, diamondX2[k], diamondY1[k]);
-        image(enemy, diamondX2[k], diamondY2[k]); 
-    }
-      enemyX+=5;
-      if (enemyX-enemyW*4 > width) {
-        enemyState = STRAIGHT;
-        enemyX=0;
-        enemyY = floor(random(50, 360)); 
-      }
-        
+        for(int i=0; i<3; i++){
+          int [] enemyXY = new int [3];
+          enemyXY[i] = i;
+          //hit detection         
+          if(shoot[i]){  
+               if(fighterX+fighterH >= enemyX-enemyXY[i]*enemyW && fighterX <= enemyX-enemyXY[i]*enemyW+enemyW){
+               if(fighterY+fighterH >= enemyY && fighterY <= enemyY+enemyH){
+                   shoot[i] = false;  
+                   hp1-=38;
+                   println (hp1) ;
+                   }
+                 }
+               }
+          if(shoot[i]==true){
+          image(enemy, enemyX-enemyXY[i]*enemyW, enemyY-enemyXY[i]*enemyH);
+          image(enemy, enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
+          image(enemy, enemyX-(4-enemyXY[i])*enemyW, enemyY-enemyXY[i]*enemyH);
+          image(enemy, enemyX-(4-enemyXY[i])*enemyW, enemyY+enemyXY[i]*enemyH);
+          }
+        }
+        enemyX+=5;
+        if (enemyX-enemyW*4 > width) {
+          enemyState = STRAIGHT;
+          enemyX=0;
+          enemyY = floor(random(50, 360)); 
+        }
       break;
     }
     //fighter
