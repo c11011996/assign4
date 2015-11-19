@@ -187,13 +187,14 @@ void draw() {
       }
     }
               
-     if(fighterX+fighterW >= treasureX && fighterX <= treasureX+treasureW+fighterW && fighterY >= treasureY-fighterH && fighterY <= treasureY+fighterH){
-     hp1 += 19;
-     println(hp1);
-     treasureX = floor(random(600));
-     treasureY = floor(random(440));
+     if(fighterX+fighterW >= treasureX && fighterX <= treasureX+treasureW+fighterW){
+       if(fighterY >= treasureY-fighterH && fighterY <= treasureY+fighterH){
+       hp1 += 19;
+       println(hp1);
+       treasureX = floor(random(600));
+       treasureY = floor(random(440));
+       }
      }
-     
       if (hp1 <= 0) {gameState=GAME_OVER;}
       if (hp1 >= 190) {hp1 = 190;}
     break;
