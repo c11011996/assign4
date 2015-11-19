@@ -209,7 +209,7 @@ void draw() {
      if(fighterX+fighterW >= treasureX && fighterX <= treasureX+treasureW+fighterW){
        if(fighterY >= treasureY-fighterH && fighterY <= treasureY+fighterH){
        hp1 += 19;
-       println(hp1);
+      // println(hp1);
        treasureX = floor(random(600));
        treasureY = floor(random(440));
        }
