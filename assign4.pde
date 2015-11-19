@@ -1,12 +1,12 @@
 int fighterX, fighterY, fighterW, fighterH;
-int bgX, hp1;
+int bgX, hp1, enemyCount;
 int treasureX, treasureY, treasureW, treasureH;
 int enemyX, enemyY, enemyW, enemyH;
 PImage bg1, bg2, enemy, fighter, hp, treasure, start1, start2, end1, end2, flame1, flame2, flame3, flame4, flame5;
 PImage [] flames = new PImage [5];
 final int GAME_START = 0, GAME_RUN = 1, GAME_WIN = 2, GAME_OVER = 3;
 final int STRAIGHT = 0, TILT = 1, DIAMOND = 2;
-boolean [] shoot = new boolean [8];
+boolean [] shoot = new boolean [5];
 int gameState, enemyState;
 boolean upPressed = false;
 boolean downPressed = false;
@@ -33,6 +33,7 @@ void setup () {
 
   gameState = GAME_START; 
   enemyState = STRAIGHT;
+  enemyCount = 0;
   fighterW = 50;
   fighterH = 50;
   fighterX = 590;
@@ -49,6 +50,7 @@ void setup () {
   treasureY = floor(random(30, 440));
   for(int i=0; i<5; i++){
     flames[i] = loadImage("img/flame"+(i+1)+".png");
+    enemyCount++;
   }
 }
 
@@ -126,7 +128,7 @@ void draw() {
                  shoot[i] = false;  
                  hp1-=38;
                  //println (hp1) ;
-                 image(flames[i],enemyX-enemyXY[i]*enemyW,enemyY);
+                 image(flames[i],enemyX-enemyXY[i]*enemyW,enemyY+enemyXY[i]*enemyH);
                  }
                }
              }
