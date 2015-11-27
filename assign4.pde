@@ -144,8 +144,7 @@ void draw() {
           for(int i=0; i<12; i++){
             shoot[i] = true;
            } 
-          }
-         
+          }   
       break; 
         
     case DIAMOND:
@@ -277,7 +276,7 @@ void draw() {
     if (mouseY > 305 && mouseY < 350 && mouseX > 200 && mouseX < 434) {
       image(end1, 0, 0);
       if (mousePressed) {
-        hp1 = 38;
+        hp1 = 40;
         fighterX = 590;
         fighterY = 240;
         gameState = GAME_RUN;
