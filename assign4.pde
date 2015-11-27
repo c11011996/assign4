@@ -39,7 +39,7 @@ void setup () {
   fighterX = 590;
   fighterY = 240;
   bgX = 0;
-  hp1 = 38;
+  hp1 = 40;
   enemyW = 60;
   enemyH = 60;
   enemyX = 0;
@@ -47,7 +47,7 @@ void setup () {
   treasureW = 40;
   treasureH = 40;
   treasureX = floor(random(10,600));
-  treasureY = floor(random(30, 440));
+  treasureY = floor(random(30,440));
   for(int i=0; i<5; i++){
     flames[i] = loadImage("img/flame"+(i+1)+".png");
     flameCount++; 
@@ -83,7 +83,7 @@ void draw() {
     image(treasure, treasureX, treasureY);
     //hp
     fill(255, 0, 0, 240);
-    rect(18, 10, hp1, 14);    
+    rect(10, 3, hp1, 18);    
     image(hp, 5, 1);
     //enemy
     switch(enemyState) {
@@ -96,7 +96,7 @@ void draw() {
              if(fighterX+fighterH >= enemyX-enemyXY[i]*enemyW && fighterX <= enemyX-enemyXY[i]*enemyW+enemyW){
              if(fighterY+fighterH >= enemyY && fighterY <= enemyY+enemyH){
                  shoot[i] = false;  
-                 hp1-=38;
+                 hp1 -= 40;
                  //println (hp1) ;
                  image(flames[i],enemyX-enemyXY[i]*enemyW,enemyY);
                  }
@@ -126,7 +126,7 @@ void draw() {
              if(fighterX+fighterH >= enemyX-enemyXY[i]*enemyW && fighterX <= enemyX+(1-enemyXY[i])*enemyW){
              if(fighterY+fighterH >= enemyY+enemyXY[i]*enemyH && fighterY <= enemyY+(1+enemyXY[i])*enemyH){
                  shoot[i] = false;  
-                 hp1-=38;
+                 hp1 -= 40;
                  //println (hp1) ;
                  image(flames[i],enemyX-enemyXY[i]*enemyW,enemyY+enemyXY[i]*enemyH);
                  }
@@ -157,7 +157,7 @@ void draw() {
                if(fighterX+fighterH >= enemyX-enemyXY[i]*enemyW && fighterX <= enemyX-enemyXY[i]*enemyW+enemyW){
                if(fighterY+fighterH >= enemyY-enemyXY[i]*enemyH && fighterY <= enemyY-enemyXY[i]*enemyH+enemyH){
                    shoot[i] = false;  
-                   hp1-=38;
+                   hp1 -= 40;
                    //println (hp1) ;
                    image(flames[i], enemyX-enemyXY[i]*enemyW, enemyY-enemyXY[i]*enemyH);
                    }
@@ -165,9 +165,6 @@ void draw() {
                }
           if(shoot[i]==true){
           image(enemy, enemyX-enemyXY[i]*enemyW, enemyY-enemyXY[i]*enemyH);
-  //        image(enemy, enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
-  //        image(enemy, enemyX-(4-enemyXY[i])*enemyW, enemyY-enemyXY[i]*enemyH);
-  //        image(enemy, enemyX-(4-enemyXY[i])*enemyW, enemyY+enemyXY[i]*enemyH);
           }
         }
         for(int i=3; i<6; i++){
@@ -178,17 +175,14 @@ void draw() {
                if(fighterX+fighterH >= enemyX-enemyXY[i]*enemyW && fighterX <= enemyX-enemyXY[i]*enemyW+enemyW){
                if(fighterY+fighterH >= enemyY+enemyXY[i]*enemyH && fighterY <= enemyY+enemyXY[i]*enemyH+enemyH){
                    shoot[i] = false;  
-                   hp1-=38;
+                   hp1 -= 40;
                    //println (hp1) ;
                    image(flames[i-3], enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
                    }
                  }
                }
           if(shoot[i]==true){
-   //       image(enemy, enemyX-enemyXY[i]*enemyW, enemyY-enemyXY[i]*enemyH);
           image(enemy, enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
-   //       image(enemy, enemyX-(4-enemyXY[i])*enemyW, enemyY-enemyXY[i]*enemyH);
-   //       image(enemy, enemyX-(4-enemyXY[i])*enemyW, enemyY+enemyXY[i]*enemyH);
           }
         }
         for(int i=6; i<9; i++){
@@ -199,17 +193,14 @@ void draw() {
                if(fighterX+fighterH >= enemyX-(4-enemyXY[i])*enemyW && fighterX <= enemyX-(4-enemyXY[i])*enemyW+enemyW){
                if(fighterY+fighterH >= enemyY-enemyXY[i]*enemyH && fighterY <= enemyY-enemyXY[i]*enemyH+enemyH){
                    shoot[i] = false;  
-                   hp1-=38;
+                   hp1 -= 40;
                    //println (hp1) ;
                    image(flames[i-6], enemyX-(4-enemyXY[i])*enemyW, enemyY-enemyXY[i]*enemyH);
                    }
                  }
                }
           if(shoot[i]==true){
-  //        image(enemy, enemyX-enemyXY[i]*enemyW, enemyY-enemyXY[i]*enemyH);
-  //        image(enemy, enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
           image(enemy, enemyX-(4-enemyXY[i])*enemyW, enemyY-enemyXY[i]*enemyH);
-  //        image(enemy, enemyX-(4-enemyXY[i])*enemyW, enemyY+enemyXY[i]*enemyH);
           }
         }
         for(int i=9; i<12; i++){
@@ -220,16 +211,13 @@ void draw() {
                if(fighterX+fighterH >= enemyX-(4-enemyXY[i])*enemyW && fighterX <= enemyX-(4-enemyXY[i])*enemyW+enemyW){
                if(fighterY+fighterH >= enemyY+enemyXY[i]*enemyH && fighterY <= enemyY+enemyXY[i]*enemyH+enemyH){
                    shoot[i] = false;  
-                   hp1-=38;
+                   hp1 -= 40;
                    //println (hp1) ;
                    image(flames[i-9], enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
                    }
                  }
                }
           if(shoot[i]==true){
- //         image(enemy, enemyX-enemyXY[i]*enemyW, enemyY-enemyXY[i]*enemyH);
- //         image(enemy, enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
- //         image(enemy, enemyX-(4-enemyXY[i])*enemyW, enemyY-enemyXY[i]*enemyH);
           image(enemy, enemyX-(4-enemyXY[i])*enemyW, enemyY+enemyXY[i]*enemyH);
           }
         }
@@ -247,40 +235,40 @@ void draw() {
     //fighter
     image(fighter, fighterX, fighterY);
     if (upPressed) {
-      fighterY -= 5;
+      fighterY -= 7;
       if (fighterY < 0) {
         fighterY = 0;
       }
     }
     if (downPressed) {
-      fighterY += 5;
+      fighterY += 7;
       if (fighterY > 430) {
         fighterY = 430;
       }
     }
     if (leftPressed) {
-      fighterX -= 5;
+      fighterX -= 7;
       if (fighterX < 0) {
         fighterX = 0;
       }
     }
     if (rightPressed) {
-      fighterX += 5;
+      fighterX += 7;
       if (fighterX > 590) {
         fighterX = 590;
       }
     }
               
-     if(fighterX+fighterW >= treasureX && fighterX <= treasureX+treasureW+fighterW){
-       if(fighterY >= treasureY-fighterH && fighterY <= treasureY+fighterH){
-       hp1 += 19;
+     if(fighterX+fighterW >= treasureX && fighterX <= treasureX+treasureW){
+       if(fighterY+fighterH >= treasureY && fighterY <= treasureY+treasureH){
+       hp1 += 20;
       // println(hp1);
        treasureX = floor(random(600));
        treasureY = floor(random(440));
        }
      }
       if (hp1 <= 0) {gameState=GAME_OVER;}
-      if (hp1 >= 190) {hp1 = 190;}
+      if (hp1 >= 200) {hp1 = 200;}
     break;
 
     //GAME OVER
