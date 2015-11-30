@@ -33,7 +33,6 @@ void setup () {
 
   gameState = GAME_START; 
   enemyState = STRAIGHT;
-  flameCount = 0;
   fighterW = 50;
   fighterH = 50;
   fighterX = 590;
@@ -50,7 +49,6 @@ void setup () {
   treasureY = floor(random(30,440));
   for(int i=0; i<5; i++){
     flames[i] = loadImage("img/flame"+(i+1)+".png");
-    flameCount++; 
   }
 }
 
@@ -95,16 +93,17 @@ void draw() {
              //hit detection   
              if(fighterX+fighterH >= enemyX-enemyXY[i]*enemyW && fighterX <= enemyX-enemyXY[i]*enemyW+enemyW){
              if(fighterY+fighterH >= enemyY && fighterY <= enemyY+enemyH){
-                 shoot[i] = false;  
+                 shoot[i] = false;
                  hp1 -= 40;
                  //println (hp1) ;
-                 image(flames[i],enemyX-enemyXY[i]*enemyW,enemyY);
+   //              image(flames[i],enemyX-enemyXY[i]*enemyW,enemyY);
                  }
                }
              }
              if(shoot[i]==true){
-             image(enemy,enemyX-enemyXY[i]*enemyW,enemyY);
-             } 
+               image(enemy,enemyX-enemyXY[i]*enemyW,enemyY);
+             }
+             
            }
            enemyX += 5;
            if(enemyX-enemyW*4 > width){
@@ -128,7 +127,7 @@ void draw() {
                  shoot[i] = false;  
                  hp1 -= 40;
                  //println (hp1) ;
-                 image(flames[i],enemyX-enemyXY[i]*enemyW,enemyY+enemyXY[i]*enemyH);
+      //           image(flames[i],enemyX-enemyXY[i]*enemyW,enemyY+enemyXY[i]*enemyH);
                  }
                }
              }
@@ -158,7 +157,7 @@ void draw() {
                    shoot[i] = false;  
                    hp1 -= 40;
                    //println (hp1) ;
-                   image(flames[i], enemyX-enemyXY[i]*enemyW, enemyY-enemyXY[i]*enemyH);
+     //              image(flames[i], enemyX-enemyXY[i]*enemyW, enemyY-enemyXY[i]*enemyH);
                    }
                  }
                }
@@ -176,7 +175,7 @@ void draw() {
                    shoot[i] = false;  
                    hp1 -= 40;
                    //println (hp1) ;
-                   image(flames[i-3], enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
+    //               image(flames[i-3], enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
                    }
                  }
                }
@@ -194,7 +193,7 @@ void draw() {
                    shoot[i] = false;  
                    hp1 -= 40;
                    //println (hp1) ;
-                   image(flames[i-6], enemyX-(4-enemyXY[i])*enemyW, enemyY-enemyXY[i]*enemyH);
+   //                image(flames[i-6], enemyX-(4-enemyXY[i])*enemyW, enemyY-enemyXY[i]*enemyH);
                    }
                  }
                }
@@ -212,7 +211,7 @@ void draw() {
                    shoot[i] = false;  
                    hp1 -= 40;
                    //println (hp1) ;
-                   image(flames[i-9], enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
+  //                 image(flames[i-9], enemyX-enemyXY[i]*enemyW, enemyY+enemyXY[i]*enemyH);
                    }
                  }
                }
